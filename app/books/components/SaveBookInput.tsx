@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function SaveBook() {
 
     const [title, setTitle] = useState('');
-    const router = useRouter(); // Initialize useRouter
+    const router = useRouter();
 
     async function saveBook() {
 
@@ -23,13 +23,14 @@ export default function SaveBook() {
 
         if (resp.ok) {
             router.refresh();
+            setTitle('');
         }
 
     }
 
     return (
         <div>
-            <input placeholder='Add Book' value={title} onChange={(e) => {
+            <input className='border-2' placeholder='Add Book' value={title} onChange={(e) => {
                 setTitle(e.target.value);
             }} />
             <button onClick={saveBook}> Save Book </button>

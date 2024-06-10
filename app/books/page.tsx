@@ -1,7 +1,8 @@
 
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import SaveBook from './components/input';
+import SaveBook from './components/SaveBookInput';
+import Link from 'next/link';
 
 export default async function Books() {
 
@@ -19,8 +20,8 @@ export default async function Books() {
 
 
 
-    const { data: books } = await supabase.from("books").select();
-
+    const { data: books } = await supabase.from("books").select("id,title");
+    console.log(23, books);
 
     return <>
         <div>
@@ -30,7 +31,9 @@ export default async function Books() {
         <div>
             {books && books.map(book =>
                 <div>
-                    {book.title}
+                    <Link href={`/books/${book.id}`}>
+                        {book.title}
+                    </Link>
                 </div>
             )}
         </div>
